@@ -270,13 +270,13 @@ async function downloadBill(patientId) {
             // Add clinic name and details
             doc.setFontSize(18);
             doc.setFont("helvetica", "bold");
-            doc.text("Wellness Haver", 20, 20);
+            doc.text("Wellness Haven", 20, 20);
             
             doc.setFontSize(12);
             doc.setFont("helvetica", "normal");
-            doc.text("123 Clinic Street, Your City, State", 20, 30);
-            doc.text("Call: (123) 456-7890", 20, 40);
-            doc.text("Email: contact@yourclinic.com", 20, 50);
+            doc.text("Wellness Haven Clinic, Hyderabad, Telangana-5000028, INDIA", 20, 30);
+            doc.text("Call: (+91) 93913 84760", 20, 40);
+            doc.text("Email: ahmedabdulfaheem1@gmail.com", 20, 50);
 
             // Add line separator
             doc.setLineWidth(0.5);
@@ -302,7 +302,7 @@ async function downloadBill(patientId) {
 
             // Add copyright and footer
             doc.setFontSize(10);
-            doc.text("© 2024 Your Clinic Name. All rights reserved.", 20, 155);
+            doc.text("© 2024 Wellness Haven. All rights reserved.", 20, 155);
 
             // Save the PDF
             doc.save(`Bill_${patient.name}.pdf`);
