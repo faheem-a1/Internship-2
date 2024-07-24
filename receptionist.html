@@ -21,6 +21,21 @@
     <h2>Patient List</h2>
     <div id="patient-list"></div>
     <script src="app.js" type="module"></script>
+    <script>
+        // Check if the user is logged in
+        document.addEventListener("DOMContentLoaded", function () {
+            // Check for an authentication token in session storage
+            const authToken = sessionStorage.getItem("authToken");
+            
+            // If the token doesn't exist, redirect to the login page
+            if (!authToken) {
+                alert("You must be logged in to access this page.");
+                window.location.href = "/index.html"; // Redirect to your login page
+            }
+        });
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <footer>
         <p>&copy; 2024 Wellness Haven. All rights reserved.</p>
     </footer>
