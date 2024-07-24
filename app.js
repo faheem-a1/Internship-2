@@ -294,7 +294,7 @@ async function downloadBill(patientId) {
             doc.text(`Issue: ${patient.issue}`, 20, 105);
             doc.text(`Token: ${patient.token}`, 20, 115);
             doc.text(`Prescription: ${patient.prescription}`, 20, 125);
-            doc.text(`Bill Amount: $${billAmount}`, 20, 135);
+            doc.text(`Bill Amount: ₨${billAmount}`, 20, 135);
 
             // Add line separator
             doc.setLineWidth(0.5);
