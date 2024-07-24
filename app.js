@@ -32,9 +32,11 @@ function login() {
 
             // Redirect based on user role
             if (user.email === "faheem@gmail.com") {
+                 sessionStorage.setItem("authToken", "your-authentication-token");
                 localStorage.setItem('userRole', 'doctor');
                 window.location.href = "doctor.html";
             } else if (user.email === "kareem@gmail.com") {
+                 sessionStorage.setItem("authToken", "your-authentication-token");
                 localStorage.setItem('userRole', 'receptionist');
                 window.location.href = "receptionist.html";
             }
@@ -47,6 +49,7 @@ function login() {
 // Logout function
 function logout() {
     signOut(auth).then(() => {
+        sessionStorage.removeItem("authToken");
         window.location.href = "index.html";
     }).catch((error) => {
         console.error("Error signing out:", error);
@@ -103,7 +106,7 @@ async function loadPatients() {
 
         let patientHTML = `
         <div>
-            <h3>${patient.name}</h3>
+            <h3>Patient Name: ${patient.name}</h3>
             <p>Age: ${patient.age}</p>
             <p>BP: ${patient.bp} Hg</p>
             <p>Temperature: ${patient.temp} ℃</p>
@@ -126,6 +129,7 @@ async function loadPatients() {
             patientHTML += `
                 <button onclick="generateBill('${patientId}')">Generate Bill</button>
                 <button onclick="removePatient('${patientId}')">Remove Patient</button>
+                <button onclick="downloadBill('${patientId}')">Download Bill</button>
             `;
         }
 
@@ -250,6 +254,65 @@ function contact(){
 }
     
 }
+async function downloadBill(patientId) {
+    const patientRef = doc(db, "patients", patientId);
+    
+    try {
+        const patientDoc = await getDoc(patientRef);
+        if (patientDoc.exists()) {
+            const patient = patientDoc.data();
+            const billAmount = calculateBill(patient); // Calculate the bill amount using your existing logic
+
+            // Create a new jsPDF instance
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Add clinic name and details
+            doc.setFontSize(18);
+            doc.setFont("helvetica", "bold");
+            doc.text("Wellness Haver", 20, 20);
+            
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "normal");
+            doc.text("123 Clinic Street, Your City, State", 20, 30);
+            doc.text("Call: (123) 456-7890", 20, 40);
+            doc.text("Email: contact@yourclinic.com", 20, 50);
+
+            // Add line separator
+            doc.setLineWidth(0.5);
+            doc.line(20, 55, 190, 55);
+
+            // Add patient and bill details
+            doc.setFontSize(16);
+            doc.setFont("helvetica", "bold");
+            doc.text("Patient Bill", 20, 70);
+
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "normal");
+            doc.text(`Patient Name: ${patient.name}`, 20, 85);
+            doc.text(`Age: ${patient.age}`, 20, 95);
+            doc.text(`Issue: ${patient.issue}`, 20, 105);
+            doc.text(`Token: ${patient.token}`, 20, 115);
+            doc.text(`Prescription: ${patient.prescription}`, 20, 125);
+            doc.text(`Bill Amount: $${billAmount}`, 20, 135);
+
+            // Add line separator
+            doc.setLineWidth(0.5);
+            doc.line(20, 145, 190, 145);
+
+            // Add copyright and footer
+            doc.setFontSize(10);
+            doc.text("© 2024 Your Clinic Name. All rights reserved.", 20, 155);
+
+            // Save the PDF
+            doc.save(`Bill_${patient.name}.pdf`);
+        } else {
+            alert("Patient not found.");
+        }
+    } catch (error) {
+        console.error("Error downloading bill:", error);
+    }
+}
 
 // Expose functions to global scope
 window.login = login;
@@ -259,6 +322,7 @@ window.addPrescription = addPrescription;
 window.generateBill = generateBill;
 window.removePatient = removePatient;
 window.contact=contact;
+window.downloadBill=downloadBill;
 
 // Load patients on page load
 window.onload = function() {
