@@ -6,9 +6,11 @@ The Clinic Management System is designed to streamline the management of patient
 
 ## Features
 
-- **Doctor Dashboard**: Add prescriptions, generate bills, and view patient details.
-- **Receptionist Dashboard**: Add new patients and view patient details.
+- **Doctor Dashboard**: Add prescriptions, and view patient details.
+- **Receptionist Dashboard**: Add new patients, generate bills, and view patient details.
 - **Authentication**: Secure login and role-based access control.
 - **Database**: Real-time data management with Firebase Firestore.
 
-
+## Technologies Used
+- **Frontend**: HTML, CSS, JavaScript
+- **Backend**: Firebase (Firestore, Authentication)
