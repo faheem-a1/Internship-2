@@ -14,3 +14,14 @@ The Clinic Management System is designed to streamline the management of patient
 ## Technologies Used
 - **Frontend**: HTML, CSS, JavaScript
 - **Backend**: Firebase (Firestore, Authentication)
+
+- ## Setup Instructions
+1. Clone the repository.
+2. Install the dependencies using - npm install firebase
+3. Then run : npm install -g firebase-tools
+4. Change the firebase configurations with your firebase configurations in the app.js
+5. Run the project.
+
+ ## Deployment
+The project is deployed on [Wellness Haven](https://wellness-haven-pied.vercel.app).
+
