@@ -6,7 +6,6 @@ This document provides a detailed low-level design for the Clinic Management Sys
 
 ## 2. System Architecture Diagram
 
-![System Architecture Diagram](link-to-your-diagram.png)
 
 - **Client Side**: Handles user interface and interactions using HTML, CSS, and JavaScript.
 - **Server Side**: Firebase Firestore for data storage and Firebase Authentication for user management.
