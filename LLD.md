@@ -4,7 +4,7 @@
 
 This document provides a detailed low-level design for the Clinic Management System, which includes the system architecture, data flow, and component interactions.
 
-## 2. System Architecture Diagram
+## 2. System Architecture 
 
 
 - **Client Side**: Handles user interface and interactions using HTML, CSS, and JavaScript.
